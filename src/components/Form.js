@@ -6,8 +6,9 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import LoginBG from "../image/LoginBG.jpg";
-import Fingerprint from "../image/Fingerprint.svg";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Form = () => {
   //setting state for the value of textfield
@@ -33,14 +34,36 @@ const Form = () => {
   };
 
   const handleSignIn = () => {
-    axios(config)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    axios(config).then(setOpen(true)).catch();
   };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") handleSignIn();
   };
+
+  //setting state for snackbar
+  const [open, setOpen] = React.useState(false);
+
+  //handling onClose event
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
   return (
     <Container maxWidth="md">
       <Grid container justifyContent="center">
@@ -101,6 +124,13 @@ const Form = () => {
           </Paper>
         </Grid>
       </Grid>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Successfully signed in!"
+        action={action}
+      />
     </Container>
   );
 };
