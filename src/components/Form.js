@@ -67,9 +67,9 @@ const Form = () => {
   return (
     <Container maxWidth="md">
       <Grid container justifyContent="center">
-        <Grid sx={{ zIndex: 10 }} item xs={10} sm={9} md={8} lg={8}>
+        <Grid sx={{ zIndex: 10 }} item xs={12} sm={9} md={8} lg={8}>
           <Paper
-            sx={{ height: { xs: "50vh", lg: "40vh" }, mt: 30 }}
+            sx={{ height: { xs: "60vh", lg: "40vh" }, mt: { xs: 20, lg: 30 } }}
             elevation={2}
           >
             <Grid container item justifyContent="center">
